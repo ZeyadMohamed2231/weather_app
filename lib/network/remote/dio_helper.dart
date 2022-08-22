@@ -20,11 +20,57 @@ class DioHelper{
   static Future<Response> getData({
   required String url,
   required Map<String,dynamic> query,
-}) async
+  }) async
   {
     return await dio.get(url,queryParameters: query,);
   }
 
+  static Future<Response> getDataCity({
+    required String url,
+    required Map<String,dynamic> query,
+  }) async
+  {
+    return await dio.get(url,queryParameters: query,);
+  }
 
+  static Future<Response> getDataFeelsLike({
+    required String url,
+    required Map<String,dynamic> query,
+  }) async
+  {
+    return await dio.get(url,queryParameters: query,);
+  }
+
+  static Future<Response> getTempMin({
+    required String url,
+    required Map<String,dynamic> query,
+  }) async
+  {
+    return await dio.get(url,queryParameters: query,);
+  }
+
+  static Future<Response> getTempMax({
+    required String url,
+    required Map<String,dynamic> query,
+  }) async
+  {
+    return await dio.get(url,queryParameters: query,);
+  }
+
+  static Future<Response> getTempHumidity({
+    required String url,
+    required Map<String,dynamic> query,
+  }) async
+  {
+    return await dio.get(url,queryParameters: query,);
+  }
+
+  static Future<Response> getTempUV({
+    required String url,
+    required Map<String,dynamic> query,
+  }) async
+  {
+    return await dio.get(url,queryParameters: query,);
+  }
 
 }

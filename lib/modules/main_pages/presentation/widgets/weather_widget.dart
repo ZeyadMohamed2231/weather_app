@@ -6,7 +6,7 @@ import 'package:weather_app/network/remote/api_calls.dart';
 import 'package:weather_app/network/remote/dio_helper.dart';
 import 'package:weather_app/shared/components/card.dart';
 import 'package:weather_app/shared/components/text.dart';
-
+import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 class MainWidget extends StatelessWidget {
@@ -42,11 +42,15 @@ class MainWidget extends StatelessWidget {
               ),
             ),
             floatingActionButton: FloatingActionButton(
-              child: Icon(Icons.add),
+              child: const Icon(Icons.add),
               onPressed: () {
 
 
+                // print(DateFormat('EEEE').format(DateTime.now().day!+1));
+                print(DateTime.now().day+1);
 
+                cubit.getTempMin();
+                cubit.getTempMax();
 
 
 
@@ -62,7 +66,7 @@ class MainWidget extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children:  [
                            Text(
-                            cubit.temp.split('.')[0],
+                            "${cubit.temp.split('.')[0]}°",
                             style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 75,
@@ -70,33 +74,33 @@ class MainWidget extends StatelessWidget {
                             ),
                           ),
                           Row(
-                            children:  const [
+                            children:   [
                               Text(
-                                'cubit.city',
-                                style: TextStyle(
+                                cubit.city,
+                                style: const TextStyle(
                                     color: Colors.white,
                                     fontSize: 25,
                                     fontWeight: FontWeight.w300
                                 ),
                               ),
-                              SizedBox(width: 5,),
-                              Icon(Icons.location_pin,color: Colors.white,)
+                              const SizedBox(width: 5,),
+                              const Icon(Icons.location_pin,color: Colors.white,)
                             ],
                           ),
                           const SizedBox(
                             height: 40,
                           ),
-                          const Text(
-                            '34°/24° Feels like 34°',
-                            style: TextStyle(
+                           Text(
+                            "${cubit.tempMin.split('.')[0]}°/${cubit.tempMax.split('.')[0]}° Feels like ${cubit.tempFeelsLike.split('.')[0]}°",
+                            style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 18,
                                 fontWeight: FontWeight.w400
                             ),
                           ),
-                          const Text(
-                            'Sun, 2:55 pm',
-                            style: TextStyle(
+                           Text(
+                            "${DateFormat('EEEE').format(DateTime.now())},  ${DateTime.now().hour.toString()}:${DateTime.now().minute.toString()}",
+                            style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 18,
                                 fontWeight: FontWeight.w400
@@ -132,12 +136,12 @@ class MainWidget extends StatelessWidget {
                                     child: Row(
                                       children:  [
                                         Column(
-                                          children: const [
-                                            MyText(text: '3 pm', color: Colors.white, fontSize: 19),
-                                            SizedBox(height: 5,),
-                                            Icon(Icons.sunny, color: Colors.yellow,),
-                                            SizedBox(height: 5,),
-                                            MyText(text: '34°', color: Colors.white, fontSize: 24)
+                                          children:  [
+                                            MyText(text: '${DateTime.now().hour.toString()}:00', color: Colors.white, fontSize: 19),
+                                            const SizedBox(height: 5,),
+                                            const Icon(Icons.sunny, color: Colors.yellow,),
+                                            const SizedBox(height: 5,),
+                                            const MyText(text: '34°', color: Colors.white, fontSize: 24)
                                           ],
                                         ),
                                         const SizedBox(width: 20,),
@@ -405,9 +409,28 @@ class MainWidget extends StatelessWidget {
                                 Padding(
                                   padding: const EdgeInsets.all(20.0),
                                   child: Row(
-                                    children: const [
-                                      MyText(text: "Today", color: Colors.white, fontSize: 20),
-                                      SizedBox(width: 70,),
+                                    children:  [
+                                      MyText(text: DateFormat('EEEE').format(DateTime.now()), color: Colors.white, fontSize: 20),
+                                      const SizedBox(width: 50,),
+                                      const Icon(Icons.water_drop,color: Colors.grey,size: 15,),
+                                      const MyText(text: "0%", color: Colors.grey, fontSize: 15),
+                                      const SizedBox(width: 30,),
+                                      const Icon(Icons.sunny,color: Colors.yellow,size: 28,),
+                                      const SizedBox(width: 5,),
+                                      const Icon(Icons.nights_stay,color: Colors.yellow,size: 25,),
+                                      const SizedBox(width: 5,),
+                                      const MyText(text: "33° 24°", color: Colors.white, fontSize: 19)
+
+                                    ],
+                                  ),
+
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 20.0,right: 20.0,bottom: 20.0),
+                                  child: Row(
+                                    children:  [
+                                      MyText(text: DateTime.monday.toString(), color: Colors.white, fontSize: 20),
+                                      SizedBox(width: 50,),
                                       Icon(Icons.water_drop,color: Colors.grey,size: 15,),
                                       MyText(text: "0%", color: Colors.grey, fontSize: 15),
                                       SizedBox(width: 30,),
@@ -426,7 +449,7 @@ class MainWidget extends StatelessWidget {
                                   child: Row(
                                     children: const [
                                       MyText(text: "Today", color: Colors.white, fontSize: 20),
-                                      SizedBox(width: 70,),
+                                      SizedBox(width: 50,),
                                       Icon(Icons.water_drop,color: Colors.grey,size: 15,),
                                       MyText(text: "0%", color: Colors.grey, fontSize: 15),
                                       SizedBox(width: 30,),
@@ -445,7 +468,7 @@ class MainWidget extends StatelessWidget {
                                   child: Row(
                                     children: const [
                                       MyText(text: "Today", color: Colors.white, fontSize: 20),
-                                      SizedBox(width: 70,),
+                                      SizedBox(width: 50,),
                                       Icon(Icons.water_drop,color: Colors.grey,size: 15,),
                                       MyText(text: "0%", color: Colors.grey, fontSize: 15),
                                       SizedBox(width: 30,),
@@ -464,7 +487,7 @@ class MainWidget extends StatelessWidget {
                                   child: Row(
                                     children: const [
                                       MyText(text: "Today", color: Colors.white, fontSize: 20),
-                                      SizedBox(width: 70,),
+                                      SizedBox(width: 50,),
                                       Icon(Icons.water_drop,color: Colors.grey,size: 15,),
                                       MyText(text: "0%", color: Colors.grey, fontSize: 15),
                                       SizedBox(width: 30,),
@@ -483,7 +506,7 @@ class MainWidget extends StatelessWidget {
                                   child: Row(
                                     children: const [
                                       MyText(text: "Today", color: Colors.white, fontSize: 20),
-                                      SizedBox(width: 70,),
+                                      SizedBox(width: 50,),
                                       Icon(Icons.water_drop,color: Colors.grey,size: 15,),
                                       MyText(text: "0%", color: Colors.grey, fontSize: 15),
                                       SizedBox(width: 30,),
@@ -502,26 +525,7 @@ class MainWidget extends StatelessWidget {
                                   child: Row(
                                     children: const [
                                       MyText(text: "Today", color: Colors.white, fontSize: 20),
-                                      SizedBox(width: 70,),
-                                      Icon(Icons.water_drop,color: Colors.grey,size: 15,),
-                                      MyText(text: "0%", color: Colors.grey, fontSize: 15),
-                                      SizedBox(width: 30,),
-                                      Icon(Icons.sunny,color: Colors.yellow,size: 28,),
-                                      SizedBox(width: 5,),
-                                      Icon(Icons.nights_stay,color: Colors.yellow,size: 25,),
-                                      SizedBox(width: 5,),
-                                      MyText(text: "33° 24°", color: Colors.white, fontSize: 19)
-
-                                    ],
-                                  ),
-
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 20.0,right: 20.0,bottom: 20.0),
-                                  child: Row(
-                                    children: const [
-                                      MyText(text: "Today", color: Colors.white, fontSize: 20),
-                                      SizedBox(width: 70,),
+                                      SizedBox(width: 50,),
                                       Icon(Icons.water_drop,color: Colors.grey,size: 15,),
                                       MyText(text: "0%", color: Colors.grey, fontSize: 15),
                                       SizedBox(width: 30,),
