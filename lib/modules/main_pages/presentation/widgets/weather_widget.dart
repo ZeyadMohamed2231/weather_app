@@ -2,13 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:weather_app/modules/main_pages/presentation/cubit/cubit.dart';
 import 'package:weather_app/modules/main_pages/presentation/cubit/status.dart';
-import 'package:weather_app/network/remote/api_calls.dart';
-import 'package:weather_app/network/remote/dio_helper.dart';
 import 'package:weather_app/shared/components/card.dart';
 import 'package:weather_app/shared/components/text.dart';
 import 'package:intl/intl.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:weather_app/shared/text_constants.dart';
 class MainWidget extends StatelessWidget {
   const MainWidget({Key? key}) : super(key: key);
 
@@ -16,11 +14,8 @@ class MainWidget extends StatelessWidget {
   Widget build(BuildContext context) {
 
 
-
-
     return BlocProvider(
       create :(context) {
-
         return TempCubit();
       },
       child: BlocConsumer<TempCubit,TempStates>(
@@ -30,6 +25,33 @@ class MainWidget extends StatelessWidget {
         builder: (BuildContext context,TempStates state)  {
           TempCubit cubit = TempCubit.get(context);
 
+          if(apiCond){
+            cubit.getTemp();
+            cubit.getTempMin();
+            cubit.getTempFeelsLike();
+            cubit.getTempMax();
+            cubit.getCity();
+            cubit.getTempFirstDayMax();
+            cubit.getTempSecDayMax();
+            cubit.getTempThirdDayMax();
+            cubit.getTempFourthDayMax();
+            cubit.getTempFifthDayMax();
+            cubit.getTempSixDayMax();
+            cubit.getTempSevenDayMax();
+            cubit.getTempFirstDayMin();
+            cubit.getTempSecDayMin();
+            cubit.getTempThirdDayMin();
+            cubit.getTempFourthDayMin();
+            cubit.getTempFifthDayMin();
+            cubit.getTempSixDayMin();
+            cubit.getTempSevenDayMin();
+            cubit.getTempSunrise();
+            cubit.getTempSunset();
+            cubit.getTempUV();
+            cubit.getTempHum();
+            cubit.getTempWind();
+            apiCond = false;
+          }
 
           return Scaffold(
             backgroundColor: Colors.lightBlue,
@@ -44,14 +66,6 @@ class MainWidget extends StatelessWidget {
             floatingActionButton: FloatingActionButton(
               child: const Icon(Icons.add),
               onPressed: () {
-
-
-                // print(DateFormat('EEEE').format(DateTime.now().day!+1));
-                print(DateTime.now().day+1);
-
-                cubit.getTempMin();
-                cubit.getTempMax();
-
 
 
               },),
@@ -99,6 +113,7 @@ class MainWidget extends StatelessWidget {
                             ),
                           ),
                            Text(
+
                             "${DateFormat('EEEE').format(DateTime.now())},  ${DateTime.now().hour.toString()}:${DateTime.now().minute.toString()}",
                             style: const TextStyle(
                                 color: Colors.white,
@@ -136,242 +151,242 @@ class MainWidget extends StatelessWidget {
                                     child: Row(
                                       children:  [
                                         Column(
-                                          children:  [
-                                            MyText(text: '${DateTime.now().hour.toString()}:00', color: Colors.white, fontSize: 19),
+                                          children:   [
+                                            const MyText(text: '9:00Am', color: Colors.white, fontSize: 19),
                                             const SizedBox(height: 5,),
                                             const Icon(Icons.sunny, color: Colors.yellow,),
                                             const SizedBox(height: 5,),
-                                            const MyText(text: '34°', color: Colors.white, fontSize: 24)
+                                            MyText(text: '${int.parse(cubit.temp.split(".")[0])-1}°', color: Colors.white, fontSize: 24)
                                           ],
                                         ),
                                         const SizedBox(width: 20,),
                                         Column(
-                                          children: const [
-                                            MyText(text: '3 pm', color: Colors.white, fontSize: 19),
-                                            SizedBox(height: 5,),
-                                            Icon(Icons.sunny, color: Colors.yellow,),
-                                            SizedBox(height: 5,),
-                                            MyText(text: '34°', color: Colors.white, fontSize: 24)
+                                          children:   [
+                                            const MyText(text: '10:00Am', color: Colors.white, fontSize: 19),
+                                            const SizedBox(height: 5,),
+                                            const Icon(Icons.sunny, color: Colors.yellow,),
+                                            const SizedBox(height: 5,),
+                                            MyText(text: '${int.parse(cubit.temp.split(".")[0])-1}°', color: Colors.white, fontSize: 24)
                                           ],
                                         ),
                                         const SizedBox(width: 20,),
                                         Column(
-                                          children: const [
-                                            MyText(text: '3 pm', color: Colors.white, fontSize: 19),
-                                            SizedBox(height: 5,),
-                                            Icon(Icons.sunny, color: Colors.yellow,),
-                                            SizedBox(height: 5,),
-                                            MyText(text: '34°', color: Colors.white, fontSize: 24)
+                                          children:   [
+                                            const MyText(text: '11:00Am', color: Colors.white, fontSize: 19),
+                                            const SizedBox(height: 5,),
+                                            const Icon(Icons.sunny, color: Colors.yellow,),
+                                            const SizedBox(height: 5,),
+                                            MyText(text: '${int.parse(cubit.temp.split(".")[0])-1}°', color: Colors.white, fontSize: 24)
                                           ],
                                         ),
                                         const SizedBox(width: 20,),
                                         Column(
-                                          children: const [
-                                            MyText(text: '3 pm', color: Colors.white, fontSize: 19),
-                                            SizedBox(height: 5,),
-                                            Icon(Icons.sunny, color: Colors.yellow,),
-                                            SizedBox(height: 5,),
-                                            MyText(text: '34°', color: Colors.white, fontSize: 24)
+                                          children:   [
+                                            const MyText(text: '12:00Pm', color: Colors.white, fontSize: 19),
+                                            const SizedBox(height: 5,),
+                                            const Icon(Icons.sunny, color: Colors.yellow,),
+                                            const SizedBox(height: 5,),
+                                            MyText(text: '${cubit.temp}°', color: Colors.white, fontSize: 24)
                                           ],
                                         ),
                                         const SizedBox(width: 20,),
                                         Column(
-                                          children: const [
-                                            MyText(text: '3 pm', color: Colors.white, fontSize: 19),
-                                            SizedBox(height: 5,),
-                                            Icon(Icons.sunny, color: Colors.yellow,),
-                                            SizedBox(height: 5,),
-                                            MyText(text: '34°', color: Colors.white, fontSize: 24)
+                                          children:   [
+                                            const MyText(text: '1:00Pm', color: Colors.white, fontSize: 19),
+                                            const SizedBox(height: 5,),
+                                            const Icon(Icons.sunny, color: Colors.yellow,),
+                                            const SizedBox(height: 5,),
+                                            MyText(text: '${cubit.tempMax}°', color: Colors.white, fontSize: 24)
                                           ],
                                         ),
                                         const SizedBox(width: 20,),
                                         Column(
-                                          children: const [
-                                            MyText(text: '3 pm', color: Colors.white, fontSize: 19),
-                                            SizedBox(height: 5,),
-                                            Icon(Icons.sunny, color: Colors.yellow,),
-                                            SizedBox(height: 5,),
-                                            MyText(text: '34°', color: Colors.white, fontSize: 24)
+                                          children:   [
+                                            const MyText(text: '2:00Pm', color: Colors.white, fontSize: 19),
+                                            const SizedBox(height: 5,),
+                                            const Icon(Icons.sunny, color: Colors.yellow,),
+                                            const SizedBox(height: 5,),
+                                            MyText(text: '${cubit.tempMax}°', color: Colors.white, fontSize: 24)
                                           ],
                                         ),
                                         const SizedBox(width: 20,),
                                         Column(
-                                          children: const [
-                                            MyText(text: '3 pm', color: Colors.white, fontSize: 19),
-                                            SizedBox(height: 5,),
-                                            Icon(Icons.sunny, color: Colors.yellow,),
-                                            SizedBox(height: 5,),
-                                            MyText(text: '34°', color: Colors.white, fontSize: 24)
+                                          children:   [
+                                            const MyText(text: '3:00Pm', color: Colors.white, fontSize: 19),
+                                            const SizedBox(height: 5,),
+                                            const Icon(Icons.sunny, color: Colors.yellow,),
+                                            const SizedBox(height: 5,),
+                                            MyText(text: '${cubit.tempMax}°', color: Colors.white, fontSize: 24)
                                           ],
                                         ),
                                         const SizedBox(width: 20,),
                                         Column(
-                                          children: const [
-                                            MyText(text: '3 pm', color: Colors.white, fontSize: 19),
-                                            SizedBox(height: 5,),
-                                            Icon(Icons.sunny, color: Colors.yellow,),
-                                            SizedBox(height: 5,),
-                                            MyText(text: '34°', color: Colors.white, fontSize: 24)
+                                          children:   [
+                                            const MyText(text: '4:00Pm', color: Colors.white, fontSize: 19),
+                                            const SizedBox(height: 5,),
+                                            const Icon(Icons.sunny, color: Colors.yellow,),
+                                            const SizedBox(height: 5,),
+                                            MyText(text: '${cubit.temp}°', color: Colors.white, fontSize: 24)
                                           ],
                                         ),
                                         const SizedBox(width: 20,),
                                         Column(
-                                          children: const [
-                                            MyText(text: '3 pm', color: Colors.white, fontSize: 19),
-                                            SizedBox(height: 5,),
-                                            Icon(Icons.sunny, color: Colors.yellow,),
-                                            SizedBox(height: 5,),
-                                            MyText(text: '34°', color: Colors.white, fontSize: 24)
+                                          children:   [
+                                            const MyText(text: '5:00Pm', color: Colors.white, fontSize: 19),
+                                            const SizedBox(height: 5,),
+                                            const Icon(Icons.sunny, color: Colors.yellow,),
+                                            const SizedBox(height: 5,),
+                                            MyText(text: '${cubit.temp}°', color: Colors.white, fontSize: 24)
                                           ],
                                         ),
                                         const SizedBox(width: 20,),
                                         Column(
-                                          children: const [
-                                            MyText(text: '3 pm', color: Colors.white, fontSize: 19),
-                                            SizedBox(height: 5,),
-                                            Icon(Icons.sunny, color: Colors.yellow,),
-                                            SizedBox(height: 5,),
-                                            MyText(text: '34°', color: Colors.white, fontSize: 24)
+                                          children:   [
+                                            const MyText(text: '6:00Pm', color: Colors.white, fontSize: 19),
+                                            const SizedBox(height: 5,),
+                                            const Icon(Icons.sunny, color: Colors.yellow,),
+                                            const SizedBox(height: 5,),
+                                            MyText(text: '${cubit.tempMin}°', color: Colors.white, fontSize: 24)
                                           ],
                                         ),
                                         const SizedBox(width: 20,),
                                         Column(
-                                          children: const [
-                                            MyText(text: '3 pm', color: Colors.white, fontSize: 19),
-                                            SizedBox(height: 5,),
-                                            Icon(Icons.sunny, color: Colors.yellow,),
-                                            SizedBox(height: 5,),
-                                            MyText(text: '34°', color: Colors.white, fontSize: 24)
+                                          children:   [
+                                            const MyText(text: '7:00Pm', color: Colors.white, fontSize: 19),
+                                            const SizedBox(height: 5,),
+                                            const Icon(Icons.sunny, color: Colors.yellow,),
+                                            const SizedBox(height: 5,),
+                                            MyText(text: '${cubit.tempMin}°', color: Colors.white, fontSize: 24)
                                           ],
                                         ),
                                         const SizedBox(width: 20,),
                                         Column(
-                                          children: const [
-                                            MyText(text: '3 pm', color: Colors.white, fontSize: 19),
-                                            SizedBox(height: 5,),
-                                            Icon(Icons.sunny, color: Colors.yellow,),
-                                            SizedBox(height: 5,),
-                                            MyText(text: '34°', color: Colors.white, fontSize: 24)
+                                          children:   [
+                                            const MyText(text: '8:00Pm', color: Colors.white, fontSize: 19),
+                                            const SizedBox(height: 5,),
+                                            const Icon(Icons.sunny, color: Colors.yellow,),
+                                            const SizedBox(height: 5,),
+                                            MyText(text: '${cubit.tempMin}°', color: Colors.white, fontSize: 24)
                                           ],
                                         ),
                                         const SizedBox(width: 20,),
                                         Column(
-                                          children: const [
-                                            MyText(text: '3 pm', color: Colors.white, fontSize: 19),
-                                            SizedBox(height: 5,),
-                                            Icon(Icons.sunny, color: Colors.yellow,),
-                                            SizedBox(height: 5,),
-                                            MyText(text: '34°', color: Colors.white, fontSize: 24)
+                                          children:   [
+                                            const MyText(text: '9:00Pm', color: Colors.white, fontSize: 19),
+                                            const SizedBox(height: 5,),
+                                            const Icon(Icons.sunny, color: Colors.yellow,),
+                                            const SizedBox(height: 5,),
+                                            MyText(text: '${cubit.tempMin}°', color: Colors.white, fontSize: 24)
                                           ],
                                         ),
                                         const SizedBox(width: 20,),
                                         Column(
-                                          children: const [
-                                            MyText(text: '3 pm', color: Colors.white, fontSize: 19),
-                                            SizedBox(height: 5,),
-                                            Icon(Icons.sunny, color: Colors.yellow,),
-                                            SizedBox(height: 5,),
-                                            MyText(text: '34°', color: Colors.white, fontSize: 24)
+                                          children:   [
+                                            const MyText(text: '10:00Pm', color: Colors.white, fontSize: 19),
+                                            const SizedBox(height: 5,),
+                                            const Icon(Icons.sunny, color: Colors.yellow,),
+                                            const SizedBox(height: 5,),
+                                            MyText(text: '${cubit.tempMin}°', color: Colors.white, fontSize: 24)
                                           ],
                                         ),
                                         const SizedBox(width: 20,),
                                         Column(
-                                          children: const [
-                                            MyText(text: '3 pm', color: Colors.white, fontSize: 19),
-                                            SizedBox(height: 5,),
-                                            Icon(Icons.sunny, color: Colors.yellow,),
-                                            SizedBox(height: 5,),
-                                            MyText(text: '34°', color: Colors.white, fontSize: 24)
+                                          children:   [
+                                            const MyText(text: '11:00Pm', color: Colors.white, fontSize: 19),
+                                            const SizedBox(height: 5,),
+                                            const Icon(Icons.sunny, color: Colors.yellow,),
+                                            const SizedBox(height: 5,),
+                                            MyText(text: '${cubit.tempMin}°', color: Colors.white, fontSize: 24)
                                           ],
                                         ),
                                         const SizedBox(width: 20,),
                                         Column(
-                                          children: const [
-                                            MyText(text: '3 pm', color: Colors.white, fontSize: 19),
-                                            SizedBox(height: 5,),
-                                            Icon(Icons.sunny, color: Colors.yellow,),
-                                            SizedBox(height: 5,),
-                                            MyText(text: '34°', color: Colors.white, fontSize: 24)
+                                          children:   [
+                                            const MyText(text: '12:00Pm', color: Colors.white, fontSize: 19),
+                                            const SizedBox(height: 5,),
+                                            const Icon(Icons.sunny, color: Colors.yellow,),
+                                            const SizedBox(height: 5,),
+                                            MyText(text: '${cubit.tempMin}°', color: Colors.white, fontSize: 24)
                                           ],
                                         ),
                                         const SizedBox(width: 20,),
                                         Column(
-                                          children: const [
-                                            MyText(text: '3 pm', color: Colors.white, fontSize: 19),
-                                            SizedBox(height: 5,),
-                                            Icon(Icons.sunny, color: Colors.yellow,),
-                                            SizedBox(height: 5,),
-                                            MyText(text: '34°', color: Colors.white, fontSize: 24)
+                                          children:   [
+                                            const MyText(text: '1:00Am', color: Colors.white, fontSize: 19),
+                                            const SizedBox(height: 5,),
+                                            const Icon(Icons.sunny, color: Colors.yellow,),
+                                            const SizedBox(height: 5,),
+                                            MyText(text: '${int.parse(cubit.tempMin.split(".")[0])-1}°', color: Colors.white, fontSize: 24)
                                           ],
                                         ),
                                         const SizedBox(width: 20,),
                                         Column(
-                                          children: const [
-                                            MyText(text: '3 pm', color: Colors.white, fontSize: 19),
-                                            SizedBox(height: 5,),
-                                            Icon(Icons.sunny, color: Colors.yellow,),
-                                            SizedBox(height: 5,),
-                                            MyText(text: '34°', color: Colors.white, fontSize: 24)
+                                          children:   [
+                                            const MyText(text: '2:00Am', color: Colors.white, fontSize: 19),
+                                            const SizedBox(height: 5,),
+                                            const Icon(Icons.sunny, color: Colors.yellow,),
+                                            const SizedBox(height: 5,),
+                                            MyText(text: '${int.parse(cubit.tempMin.split(".")[0])-1}°', color: Colors.white, fontSize: 24)
                                           ],
                                         ),
                                         const SizedBox(width: 20,),
                                         Column(
-                                          children: const [
-                                            MyText(text: '3 pm', color: Colors.white, fontSize: 19),
-                                            SizedBox(height: 5,),
-                                            Icon(Icons.sunny, color: Colors.yellow,),
-                                            SizedBox(height: 5,),
-                                            MyText(text: '34°', color: Colors.white, fontSize: 24)
+                                          children:   [
+                                            const MyText(text: '3:00Am', color: Colors.white, fontSize: 19),
+                                            const SizedBox(height: 5,),
+                                            const Icon(Icons.sunny, color: Colors.yellow,),
+                                            const SizedBox(height: 5,),
+                                            MyText(text: '${int.parse(cubit.tempMin.split(".")[0])-1}°', color: Colors.white, fontSize: 24)
                                           ],
                                         ),
                                         const SizedBox(width: 20,),
                                         Column(
-                                          children: const [
-                                            MyText(text: '3 pm', color: Colors.white, fontSize: 19),
-                                            SizedBox(height: 5,),
-                                            Icon(Icons.sunny, color: Colors.yellow,),
-                                            SizedBox(height: 5,),
-                                            MyText(text: '34°', color: Colors.white, fontSize: 24)
+                                          children:   [
+                                            const MyText(text:  '4:00Am', color: Colors.white, fontSize: 19),
+                                            const SizedBox(height: 5,),
+                                            const Icon(Icons.sunny, color: Colors.yellow,),
+                                            const SizedBox(height: 5,),
+                                            MyText(text: '${int.parse(cubit.tempMin.split(".")[0])-1}°', color: Colors.white, fontSize: 24)
                                           ],
                                         ),
                                         const SizedBox(width: 20,),
                                         Column(
-                                          children: const [
-                                            MyText(text: '3 pm', color: Colors.white, fontSize: 19),
-                                            SizedBox(height: 5,),
-                                            Icon(Icons.sunny, color: Colors.yellow,),
-                                            SizedBox(height: 5,),
-                                            MyText(text: '34°', color: Colors.white, fontSize: 24)
+                                          children:   [
+                                            const MyText(text: '5:00Am', color: Colors.white, fontSize: 19),
+                                            const SizedBox(height: 5,),
+                                            const Icon(Icons.sunny, color: Colors.yellow,),
+                                            const SizedBox(height: 5,),
+                                            MyText(text: '${int.parse(cubit.tempMin.split(".")[0])-1}°', color: Colors.white, fontSize: 24)
                                           ],
                                         ),
                                         const SizedBox(width: 20,),
                                         Column(
-                                          children: const [
-                                            MyText(text: '3 pm', color: Colors.white, fontSize: 19),
-                                            SizedBox(height: 5,),
-                                            Icon(Icons.sunny, color: Colors.yellow,),
-                                            SizedBox(height: 5,),
-                                            MyText(text: '34°', color: Colors.white, fontSize: 24)
+                                          children:   [
+                                            const MyText(text: '6:00Am', color: Colors.white, fontSize: 19),
+                                            const SizedBox(height: 5,),
+                                            const Icon(Icons.sunny, color: Colors.yellow,),
+                                            const SizedBox(height: 5,),
+                                            MyText(text: '${int.parse(cubit.tempMin.split(".")[0])-1}°', color: Colors.white, fontSize: 24)
                                           ],
                                         ),
                                         const SizedBox(width: 20,),
                                         Column(
-                                          children: const [
-                                            MyText(text: '3 pm', color: Colors.white, fontSize: 19),
-                                            SizedBox(height: 5,),
-                                            Icon(Icons.sunny, color: Colors.yellow,),
-                                            SizedBox(height: 5,),
-                                            MyText(text: '34°', color: Colors.white, fontSize: 24)
+                                          children:   [
+                                            const MyText(text: '7:00Am', color: Colors.white, fontSize: 19),
+                                            const SizedBox(height: 5,),
+                                            const Icon(Icons.sunny, color: Colors.yellow,),
+                                            const SizedBox(height: 5,),
+                                            MyText(text: '${int.parse(cubit.tempMin.split(".")[0])-1}°', color: Colors.white, fontSize: 24)
                                           ],
                                         ),
                                         const SizedBox(width: 20,),
                                         Column(
-                                          children: const [
-                                            MyText(text: '3 pm', color: Colors.white, fontSize: 19),
-                                            SizedBox(height: 5,),
-                                            Icon(Icons.sunny, color: Colors.yellow,),
-                                            SizedBox(height: 5,),
-                                            MyText(text: '34°', color: Colors.white, fontSize: 24)
+                                          children:   [
+                                            const MyText(text: '8:00Am', color: Colors.white, fontSize: 19),
+                                            const SizedBox(height: 5,),
+                                            const Icon(Icons.sunny, color: Colors.yellow,),
+                                            const SizedBox(height: 5,),
+                                            MyText(text: '${int.parse(cubit.tempMin.split(".")[0])-1}°', color: Colors.white, fontSize: 24)
                                           ],
                                         ),
                                         const SizedBox(width: 20,),
@@ -409,8 +424,46 @@ class MainWidget extends StatelessWidget {
                                 Padding(
                                   padding: const EdgeInsets.all(20.0),
                                   child: Row(
+                                    children:    [
+                                      const MyText(text: 'Saturday', color: Colors.white, fontSize: 20),
+                                      const SizedBox(width: 40,),
+                                      const Icon(Icons.water_drop,color: Colors.grey,size: 15,),
+                                      const MyText(text: "0%", color: Colors.grey, fontSize: 15),
+                                      const SizedBox(width: 30,),
+                                      const Icon(Icons.sunny,color: Colors.yellow,size: 28,),
+                                      const SizedBox(width: 5,),
+                                      const Icon(Icons.nights_stay,color: Colors.yellow,size: 25,),
+                                      const SizedBox(width: 5,),
+                                      MyText(text: "${cubit.tempFirstDayMax}° ${cubit.tempFirstDay}°", color: Colors.white, fontSize: 19)
+
+                                    ],
+                                  ),
+
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 20.0,right: 20.0,bottom: 20.0),
+                                  child: Row(
+                                    children:   [
+                                      const MyText(text: 'Sunday', color: Colors.white, fontSize: 20),
+                                      const SizedBox(width: 55,),
+                                      const Icon(Icons.water_drop,color: Colors.grey,size: 15,),
+                                      const MyText(text: "0%", color: Colors.grey, fontSize: 15),
+                                      const SizedBox(width: 30,),
+                                      const Icon(Icons.sunny,color: Colors.yellow,size: 28,),
+                                      const SizedBox(width: 5,),
+                                      const Icon(Icons.nights_stay,color: Colors.yellow,size: 25,),
+                                      const SizedBox(width: 5,),
+                                      MyText(text: "${cubit.tempSecondDayMax}° ${cubit.tempSecondDay}°", color: Colors.white, fontSize: 19)
+
+                                    ],
+                                  ),
+
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 20.0,right: 20.0,bottom: 20.0),
+                                  child: Row(
                                     children:  [
-                                      MyText(text: DateFormat('EEEE').format(DateTime.now()), color: Colors.white, fontSize: 20),
+                                      const MyText(text: "Monday", color: Colors.white, fontSize: 20),
                                       const SizedBox(width: 50,),
                                       const Icon(Icons.water_drop,color: Colors.grey,size: 15,),
                                       const MyText(text: "0%", color: Colors.grey, fontSize: 15),
@@ -419,7 +472,7 @@ class MainWidget extends StatelessWidget {
                                       const SizedBox(width: 5,),
                                       const Icon(Icons.nights_stay,color: Colors.yellow,size: 25,),
                                       const SizedBox(width: 5,),
-                                      const MyText(text: "33° 24°", color: Colors.white, fontSize: 19)
+                                      MyText(text: "${cubit.tempThirdDayMax}° ${cubit.tempThirdDay}°", color: Colors.white, fontSize: 19)
 
                                     ],
                                   ),
@@ -429,16 +482,16 @@ class MainWidget extends StatelessWidget {
                                   padding: const EdgeInsets.only(left: 20.0,right: 20.0,bottom: 20.0),
                                   child: Row(
                                     children:  [
-                                      MyText(text: DateTime.monday.toString(), color: Colors.white, fontSize: 20),
-                                      SizedBox(width: 50,),
-                                      Icon(Icons.water_drop,color: Colors.grey,size: 15,),
-                                      MyText(text: "0%", color: Colors.grey, fontSize: 15),
-                                      SizedBox(width: 30,),
-                                      Icon(Icons.sunny,color: Colors.yellow,size: 28,),
-                                      SizedBox(width: 5,),
-                                      Icon(Icons.nights_stay,color: Colors.yellow,size: 25,),
-                                      SizedBox(width: 5,),
-                                      MyText(text: "33° 24°", color: Colors.white, fontSize: 19)
+                                      const MyText(text: "Tuesday", color: Colors.white, fontSize: 20),
+                                      const SizedBox(width: 45,),
+                                      const Icon(Icons.water_drop,color: Colors.grey,size: 15,),
+                                      const MyText(text: "0%", color: Colors.grey, fontSize: 15),
+                                      const SizedBox(width: 30,),
+                                      const Icon(Icons.sunny,color: Colors.yellow,size: 28,),
+                                      const SizedBox(width: 5,),
+                                      const Icon(Icons.nights_stay,color: Colors.yellow,size: 25,),
+                                      const SizedBox(width: 5,),
+                                      MyText(text: "${cubit.tempFourthDayMax}° ${cubit.tempFourthDay}°", color: Colors.white, fontSize: 19)
 
                                     ],
                                   ),
@@ -447,17 +500,17 @@ class MainWidget extends StatelessWidget {
                                 Padding(
                                   padding: const EdgeInsets.only(left: 20.0,right: 20.0,bottom: 20.0),
                                   child: Row(
-                                    children: const [
-                                      MyText(text: "Today", color: Colors.white, fontSize: 20),
-                                      SizedBox(width: 50,),
-                                      Icon(Icons.water_drop,color: Colors.grey,size: 15,),
-                                      MyText(text: "0%", color: Colors.grey, fontSize: 15),
-                                      SizedBox(width: 30,),
-                                      Icon(Icons.sunny,color: Colors.yellow,size: 28,),
-                                      SizedBox(width: 5,),
-                                      Icon(Icons.nights_stay,color: Colors.yellow,size: 25,),
-                                      SizedBox(width: 5,),
-                                      MyText(text: "33° 24°", color: Colors.white, fontSize: 19)
+                                    children:  [
+                                      const MyText(text: "Wednesday", color: Colors.white, fontSize: 20),
+                                      const SizedBox(width: 20,),
+                                      const Icon(Icons.water_drop,color: Colors.grey,size: 15,),
+                                      const MyText(text: "0%", color: Colors.grey, fontSize: 15),
+                                      const SizedBox(width: 30,),
+                                      const Icon(Icons.sunny,color: Colors.yellow,size: 28,),
+                                      const SizedBox(width: 5,),
+                                      const Icon(Icons.nights_stay,color: Colors.yellow,size: 25,),
+                                      const SizedBox(width: 5,),
+                                      MyText(text: "${cubit.tempFifthDayMax}° ${cubit.tempFifthDay}°", color: Colors.white, fontSize: 19)
 
                                     ],
                                   ),
@@ -466,17 +519,17 @@ class MainWidget extends StatelessWidget {
                                 Padding(
                                   padding: const EdgeInsets.only(left: 20.0,right: 20.0,bottom: 20.0),
                                   child: Row(
-                                    children: const [
-                                      MyText(text: "Today", color: Colors.white, fontSize: 20),
-                                      SizedBox(width: 50,),
-                                      Icon(Icons.water_drop,color: Colors.grey,size: 15,),
-                                      MyText(text: "0%", color: Colors.grey, fontSize: 15),
-                                      SizedBox(width: 30,),
-                                      Icon(Icons.sunny,color: Colors.yellow,size: 28,),
-                                      SizedBox(width: 5,),
-                                      Icon(Icons.nights_stay,color: Colors.yellow,size: 25,),
-                                      SizedBox(width: 5,),
-                                      MyText(text: "33° 24°", color: Colors.white, fontSize: 19)
+                                    children:  [
+                                      const MyText(text: "Thursday", color: Colors.white, fontSize: 20),
+                                      const SizedBox(width: 42,),
+                                      const Icon(Icons.water_drop,color: Colors.grey,size: 15,),
+                                      const MyText(text: "0%", color: Colors.grey, fontSize: 15),
+                                      const SizedBox(width: 30,),
+                                      const Icon(Icons.sunny,color: Colors.yellow,size: 28,),
+                                      const SizedBox(width: 5,),
+                                      const Icon(Icons.nights_stay,color: Colors.yellow,size: 25,),
+                                      const SizedBox(width: 5,),
+                                      MyText(text: "${cubit.tempSixDayMax}° ${cubit.tempSixDay}°", color: Colors.white, fontSize: 19)
 
                                     ],
                                   ),
@@ -485,55 +538,17 @@ class MainWidget extends StatelessWidget {
                                 Padding(
                                   padding: const EdgeInsets.only(left: 20.0,right: 20.0,bottom: 20.0),
                                   child: Row(
-                                    children: const [
-                                      MyText(text: "Today", color: Colors.white, fontSize: 20),
-                                      SizedBox(width: 50,),
-                                      Icon(Icons.water_drop,color: Colors.grey,size: 15,),
-                                      MyText(text: "0%", color: Colors.grey, fontSize: 15),
-                                      SizedBox(width: 30,),
-                                      Icon(Icons.sunny,color: Colors.yellow,size: 28,),
-                                      SizedBox(width: 5,),
-                                      Icon(Icons.nights_stay,color: Colors.yellow,size: 25,),
-                                      SizedBox(width: 5,),
-                                      MyText(text: "33° 24°", color: Colors.white, fontSize: 19)
-
-                                    ],
-                                  ),
-
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 20.0,right: 20.0,bottom: 20.0),
-                                  child: Row(
-                                    children: const [
-                                      MyText(text: "Today", color: Colors.white, fontSize: 20),
-                                      SizedBox(width: 50,),
-                                      Icon(Icons.water_drop,color: Colors.grey,size: 15,),
-                                      MyText(text: "0%", color: Colors.grey, fontSize: 15),
-                                      SizedBox(width: 30,),
-                                      Icon(Icons.sunny,color: Colors.yellow,size: 28,),
-                                      SizedBox(width: 5,),
-                                      Icon(Icons.nights_stay,color: Colors.yellow,size: 25,),
-                                      SizedBox(width: 5,),
-                                      MyText(text: "33° 24°", color: Colors.white, fontSize: 19)
-
-                                    ],
-                                  ),
-
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 20.0,right: 20.0,bottom: 20.0),
-                                  child: Row(
-                                    children: const [
-                                      MyText(text: "Today", color: Colors.white, fontSize: 20),
-                                      SizedBox(width: 50,),
-                                      Icon(Icons.water_drop,color: Colors.grey,size: 15,),
-                                      MyText(text: "0%", color: Colors.grey, fontSize: 15),
-                                      SizedBox(width: 30,),
-                                      Icon(Icons.sunny,color: Colors.yellow,size: 28,),
-                                      SizedBox(width: 5,),
-                                      Icon(Icons.nights_stay,color: Colors.yellow,size: 25,),
-                                      SizedBox(width: 5,),
-                                      MyText(text: "33° 24°", color: Colors.white, fontSize: 19)
+                                    children:  [
+                                      const MyText(text: "Friday", color: Colors.white, fontSize: 20),
+                                      const SizedBox(width: 70,),
+                                      const Icon(Icons.water_drop,color: Colors.grey,size: 15,),
+                                      const MyText(text: "0%", color: Colors.grey, fontSize: 15),
+                                      const SizedBox(width: 30,),
+                                      const Icon(Icons.sunny,color: Colors.yellow,size: 28,),
+                                      const SizedBox(width: 5,),
+                                      const Icon(Icons.nights_stay,color: Colors.yellow,size: 25,),
+                                      const SizedBox(width: 5,),
+                                      MyText(text: "${cubit.tempSevenDayMax}° ${cubit.tempSevenDay}°", color: Colors.white, fontSize: 19)
 
                                     ],
                                   ),
@@ -553,7 +568,7 @@ class MainWidget extends StatelessWidget {
                                       children:  [
                                         const MyText(text: 'Sunrise', color: Colors.white, fontSize: 25),
                                         const SizedBox(height: 10,),
-                                        const MyText(text: '5:21 am', color: Colors.white, fontSize: 25),
+                                         MyText(text: cubit.tempSunrise, color: Colors.white, fontSize: 25),
                                         Image.asset(
                                           "assets/images/sunrise.gif",
                                           height: 100.0,
@@ -567,7 +582,7 @@ class MainWidget extends StatelessWidget {
                                       children:  [
                                         const MyText(text: 'Sunset', color: Colors.white, fontSize: 25),
                                         const SizedBox(height: 10,),
-                                        const MyText(text: '6:36 pm', color: Colors.white, fontSize: 25),
+                                         MyText(text: cubit.tempSunset, color: Colors.white, fontSize: 25),
                                         Image.asset(
                                           "assets/images/sunrise.gif",
                                           height: 100.0,
@@ -588,33 +603,33 @@ class MainWidget extends StatelessWidget {
                                 children: [
                                   Expanded(
                                     child: Column(
-                                      children: const [
+                                      children:  const [
                                         Icon(Icons.sunny, size: 55,color: Colors.yellow,),
                                         MyText(text: 'UV index', color: Colors.white, fontSize: 25),
                                         SizedBox(height: 5,),
-                                        MyText(text: 'High', color: Colors.grey, fontSize: 15),
+                                        MyText(text: "High", color: Colors.grey, fontSize: 15),
 
                                       ],
                                     ),
                                   ),
                                   Expanded(
                                     child: Column(
-                                      children: const [
-                                        Icon(Icons.wind_power, size: 55,color: Colors.grey,),
-                                        MyText(text: 'Wind', color: Colors.white, fontSize: 25),
-                                        SizedBox(height: 5,),
-                                        MyText(text: '23 km/h', color: Colors.grey, fontSize: 15),
+                                      children:  [
+                                        const Icon(Icons.wind_power, size: 55,color: Colors.grey,),
+                                        const MyText(text: 'Wind', color: Colors.white, fontSize: 25),
+                                        const SizedBox(height: 5,),
+                                        MyText(text: '${cubit.tempWind} km/h', color: Colors.grey, fontSize: 15),
 
                                       ],
                                     ),
                                   ),
                                   Expanded(
                                     child: Column(
-                                      children: const [
-                                        Icon(Icons.water_drop, size: 55,color: Colors.blue,),
-                                        MyText(text: 'Humidity', color: Colors.white, fontSize: 25),
-                                        SizedBox(height: 5,),
-                                        MyText(text: '31%', color: Colors.grey, fontSize: 15),
+                                      children:  [
+                                        const Icon(Icons.water_drop, size: 55,color: Colors.blue,),
+                                        const MyText(text: 'Humidity', color: Colors.white, fontSize: 25),
+                                        const SizedBox(height: 5,),
+                                        MyText(text: '${cubit.tempHum}%', color: Colors.grey, fontSize: 15),
 
                                       ],
                                     ),
@@ -633,23 +648,26 @@ class MainWidget extends StatelessWidget {
                 ),
               ],
             ),
-
-
-
             drawer: Drawer(
-
               backgroundColor: Colors.lightBlue,
               child: ListView(
                 padding: EdgeInsets.zero,
                 children: [
-                  const DrawerHeader(
-                    decoration: BoxDecoration(
-                      color: Colors.blue,
-                    ),
-                    child: Text('Drawer Header'),
+                   DrawerHeader(
+                    child:Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                  children: const [
+                      Icon(Icons.settings,color: Colors.white),
+                ],
+              ),
+                    )
+
                   ),
                   ListTile(
-                    title: const Text('Item 1'),
+                    leading: Icon(Icons.star,color: Colors.white),
+                    title: const Text('Favourite locations',style:TextStyle(color:Colors.white,fontSize:20)),
                     onTap: () {
                       // Update the state of the app.
                       // ...

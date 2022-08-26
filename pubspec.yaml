@@ -49,6 +49,7 @@ dev_dependencies:
   flutter_bloc: ^8.0.1
   bloc: ^8.0.3
   intl: ^0.17.0
+  sunrise_sunset_calc: ^3.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

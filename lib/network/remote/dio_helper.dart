@@ -57,7 +57,105 @@ class DioHelper{
     return await dio.get(url,queryParameters: query,);
   }
 
-  static Future<Response> getTempHumidity({
+
+
+  static Future<Response> getTempFirstDayMin({
+    required String url,
+    required Map<String,dynamic> query,
+  }) async
+  {
+    return await dio.get(url,queryParameters: query,);
+  }
+
+  static Future<Response> getTempSecDayMin({
+    required String url,
+    required Map<String,dynamic> query,
+  }) async
+  {
+    return await dio.get(url,queryParameters: query,);
+  }
+  static Future<Response> getTempThirdDayMin({
+    required String url,
+    required Map<String,dynamic> query,
+  }) async
+  {
+    return await dio.get(url,queryParameters: query,);
+  }
+  static Future<Response> getTempFourthDayMin({
+    required String url,
+    required Map<String,dynamic> query,
+  }) async
+  {
+    return await dio.get(url,queryParameters: query,);
+  }
+  static Future<Response> getTempFifthDayMin({
+    required String url,
+    required Map<String,dynamic> query,
+  }) async
+  {
+    return await dio.get(url,queryParameters: query,);
+  }
+  static Future<Response> getTempSixDayMin({
+    required String url,
+    required Map<String,dynamic> query,
+  }) async
+  {
+    return await dio.get(url,queryParameters: query,);
+  }
+  static Future<Response> getTempSevenDayMin({
+    required String url,
+    required Map<String,dynamic> query,
+  }) async
+  {
+    return await dio.get(url,queryParameters: query,);
+  }
+
+
+
+  static Future<Response> getTempFirstDayMax({
+    required String url,
+    required Map<String,dynamic> query,
+  }) async
+  {
+    return await dio.get(url,queryParameters: query,);
+  }
+
+  static Future<Response> getTempSecDayMax({
+    required String url,
+    required Map<String,dynamic> query,
+  }) async
+  {
+    return await dio.get(url,queryParameters: query,);
+  }
+  static Future<Response> getTempThirdDayMax({
+    required String url,
+    required Map<String,dynamic> query,
+  }) async
+  {
+    return await dio.get(url,queryParameters: query,);
+  }
+  static Future<Response> getTempFourthDayMax({
+    required String url,
+    required Map<String,dynamic> query,
+  }) async
+  {
+    return await dio.get(url,queryParameters: query,);
+  }
+  static Future<Response> getTempFifthDayMax({
+    required String url,
+    required Map<String,dynamic> query,
+  }) async
+  {
+    return await dio.get(url,queryParameters: query,);
+  }
+  static Future<Response> getTempSixDayMax({
+    required String url,
+    required Map<String,dynamic> query,
+  }) async
+  {
+    return await dio.get(url,queryParameters: query,);
+  }
+  static Future<Response> getTempSevenDayMax({
     required String url,
     required Map<String,dynamic> query,
   }) async
@@ -73,4 +171,19 @@ class DioHelper{
     return await dio.get(url,queryParameters: query,);
   }
 
+  static Future<Response> getTempWind({
+    required String url,
+    required Map<String,dynamic> query,
+  }) async
+  {
+    return await dio.get(url,queryParameters: query,);
+  }
+
+  static Future<Response> getTempHum({
+    required String url,
+    required Map<String,dynamic> query,
+  }) async
+  {
+    return await dio.get(url,queryParameters: query,);
+  }
 }
