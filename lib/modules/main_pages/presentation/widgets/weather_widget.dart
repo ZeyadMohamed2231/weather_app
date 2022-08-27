@@ -13,6 +13,35 @@ class MainWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
+    Color getColor(){
+      if(DateTime.now().hour<19){
+        return Colors.lightBlue;
+      }else{
+        return Colors.black;
+      }
+    }
+    Color getWidgetColor(){
+      if(DateTime.now().hour<19){
+        return  Colors.lightBlueAccent;
+      }else{
+        return Colors.grey;
+      }
+    }
+    String getSunMoon(){
+      if(DateTime.now().hour<19){
+        return  "assets/images/sunny.gif";
+      }else{
+        return "assets/images/moon.gif";
+      }
+    }
+
+    String getSunRiseSet(){
+      if(DateTime.now().hour<19){
+        return  "assets/images/sunrise.gif";
+      }else{
+        return "assets/images/sunrise_grey.gif";
+      }
+    }
 
     return BlocProvider(
       create :(context) {
@@ -54,21 +83,21 @@ class MainWidget extends StatelessWidget {
           }
 
           return Scaffold(
-            backgroundColor: Colors.lightBlue,
+            backgroundColor: getColor(),
             appBar: AppBar(
-              backgroundColor: Colors.lightBlue,
+              backgroundColor: getColor(),
               elevation: 0,
-              systemOverlayStyle: const SystemUiOverlayStyle(
-                statusBarColor: Colors.lightBlue,
+              systemOverlayStyle:  SystemUiOverlayStyle(
+                statusBarColor:  getColor(),
                 statusBarIconBrightness: Brightness.light,
               ),
             ),
-            floatingActionButton: FloatingActionButton(
-              child: const Icon(Icons.add),
-              onPressed: () {
-
-
-              },),
+            // floatingActionButton: FloatingActionButton(
+            //   child: const Icon(Icons.add),
+            //   onPressed: () {
+            //
+            //
+            //   },),
             body: Column(
               children: [
                 Row(
@@ -128,7 +157,7 @@ class MainWidget extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(left: 25.0,bottom: 30),
                       child: Image.asset(
-                        "assets/images/sunny.gif",
+                        getSunMoon(),
                         height: 125.0,
                         width: 125.0,
                       ),
@@ -142,6 +171,7 @@ class MainWidget extends StatelessWidget {
                       children: [
                         MyCard(
                             height: 130,
+                            color: getWidgetColor(),
                             widget: Column(
                               children: [
                                 SingleChildScrollView(
@@ -149,6 +179,7 @@ class MainWidget extends StatelessWidget {
                                   child: Padding(
                                     padding: const EdgeInsets.all(18.0),
                                     child: Row(
+
                                       children:  [
                                         Column(
                                           children:   [
@@ -406,6 +437,7 @@ class MainWidget extends StatelessWidget {
                         const SizedBox(height: 20,),
                         MyCard(
                             height: 110,
+                            color: getWidgetColor(),
                             widget: Padding(
                               padding: const EdgeInsets.only(top: 15),
                               child: Column(
@@ -419,6 +451,7 @@ class MainWidget extends StatelessWidget {
                         const SizedBox(height: 20,),
                         MyCard(
                             height: 370,
+                            color: getWidgetColor(),
                             widget: Column(
                               children: [
                                 Padding(
@@ -559,6 +592,7 @@ class MainWidget extends StatelessWidget {
                         const SizedBox(height: 20,),
                         MyCard(
                             height: 200,
+                            color: getWidgetColor(),
                             widget: Padding(
                               padding: const EdgeInsets.only(left:20.0,top:20,right: 20),
                               child: Row(
@@ -570,7 +604,7 @@ class MainWidget extends StatelessWidget {
                                         const SizedBox(height: 10,),
                                          MyText(text: cubit.tempSunrise, color: Colors.white, fontSize: 25),
                                         Image.asset(
-                                          "assets/images/sunrise.gif",
+                                          getSunRiseSet(),
                                           height: 100.0,
                                           width: 100.0,
                                         ),
@@ -584,7 +618,7 @@ class MainWidget extends StatelessWidget {
                                         const SizedBox(height: 10,),
                                          MyText(text: cubit.tempSunset, color: Colors.white, fontSize: 25),
                                         Image.asset(
-                                          "assets/images/sunrise.gif",
+                                          getSunRiseSet(),
                                           height: 100.0,
                                           width: 100.0,
                                         ),
@@ -597,6 +631,7 @@ class MainWidget extends StatelessWidget {
                         const SizedBox(height: 20,),
                         MyCard(
                             height: 170,
+                            color: getWidgetColor(),
                             widget: Padding(
                               padding: const EdgeInsets.all(20.0),
                               child: Row(
@@ -607,7 +642,7 @@ class MainWidget extends StatelessWidget {
                                         Icon(Icons.sunny, size: 55,color: Colors.yellow,),
                                         MyText(text: 'UV index', color: Colors.white, fontSize: 25),
                                         SizedBox(height: 5,),
-                                        MyText(text: "High", color: Colors.grey, fontSize: 15),
+                                        MyText(text: "High", color: Colors.black26, fontSize: 15),
 
                                       ],
                                     ),
@@ -615,10 +650,10 @@ class MainWidget extends StatelessWidget {
                                   Expanded(
                                     child: Column(
                                       children:  [
-                                        const Icon(Icons.wind_power, size: 55,color: Colors.grey,),
+                                        const Icon(Icons.wind_power, size: 55,color: Colors.black26,),
                                         const MyText(text: 'Wind', color: Colors.white, fontSize: 25),
                                         const SizedBox(height: 5,),
-                                        MyText(text: '${cubit.tempWind} km/h', color: Colors.grey, fontSize: 15),
+                                        MyText(text: '${cubit.tempWind} km/h', color: Colors.black26, fontSize: 15),
 
                                       ],
                                     ),
@@ -629,7 +664,7 @@ class MainWidget extends StatelessWidget {
                                         const Icon(Icons.water_drop, size: 55,color: Colors.blue,),
                                         const MyText(text: 'Humidity', color: Colors.white, fontSize: 25),
                                         const SizedBox(height: 5,),
-                                        MyText(text: '${cubit.tempHum}%', color: Colors.grey, fontSize: 15),
+                                        MyText(text: '${cubit.tempHum}%', color: Colors.black26, fontSize: 15),
 
                                       ],
                                     ),
@@ -649,7 +684,7 @@ class MainWidget extends StatelessWidget {
               ],
             ),
             drawer: Drawer(
-              backgroundColor: Colors.lightBlue,
+              backgroundColor: getColor(),
               child: ListView(
                 padding: EdgeInsets.zero,
                 children: [
