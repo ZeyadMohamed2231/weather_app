@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:weather_app/modules/main_pages/presentation/cubit/cubit.dart';
 import 'package:weather_app/modules/main_pages/presentation/cubit/status.dart';
 import 'package:weather_app/shared/components/card.dart';
+import 'package:weather_app/shared/components/my_button.dart';
 import 'package:weather_app/shared/components/text.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,35 +14,37 @@ class MainWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
+
     Color getColor(){
-      if(DateTime.now().hour<19){
+      if(DateTime.now().hour<19 && DateTime.now().hour>5){
         return Colors.lightBlue;
       }else{
         return Colors.black;
       }
     }
     Color getWidgetColor(){
-      if(DateTime.now().hour<19){
+      if(DateTime.now().hour<19 && DateTime.now().hour>5){
         return  Colors.lightBlueAccent;
       }else{
         return Colors.grey;
       }
     }
     String getSunMoon(){
-      if(DateTime.now().hour<19){
+      if(DateTime.now().hour<19 && DateTime.now().hour>5){
         return  "assets/images/sunny.gif";
       }else{
         return "assets/images/moon.gif";
       }
     }
-
     String getSunRiseSet(){
-      if(DateTime.now().hour<19){
+      if(DateTime.now().hour<19 && DateTime.now().hour>5){
         return  "assets/images/sunrise.gif";
       }else{
         return "assets/images/sunrise_grey.gif";
       }
     }
+
+
 
     return BlocProvider(
       create :(context) {
@@ -92,12 +95,7 @@ class MainWidget extends StatelessWidget {
                 statusBarIconBrightness: Brightness.light,
               ),
             ),
-            // floatingActionButton: FloatingActionButton(
-            //   child: const Icon(Icons.add),
-            //   onPressed: () {
-            //
-            //
-            //   },),
+
             body: Column(
               children: [
                 Row(
@@ -525,10 +523,8 @@ class MainWidget extends StatelessWidget {
                                       const Icon(Icons.nights_stay,color: Colors.yellow,size: 25,),
                                       const SizedBox(width: 5,),
                                       MyText(text: "${cubit.tempFourthDayMax}° ${cubit.tempFourthDay}°", color: Colors.white, fontSize: 19)
-
                                     ],
                                   ),
-
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.only(left: 20.0,right: 20.0,bottom: 20.0),
@@ -665,19 +661,15 @@ class MainWidget extends StatelessWidget {
                                         const MyText(text: 'Humidity', color: Colors.white, fontSize: 25),
                                         const SizedBox(height: 5,),
                                         MyText(text: '${cubit.tempHum}%', color: Colors.black26, fontSize: 15),
-
                                       ],
                                     ),
                                   ),
-
                                 ],
                               ),
                             )
                         ),
                         const SizedBox(height: 20,),
-
                       ],
-
                     ),
                   ),
                 ),
@@ -701,18 +693,52 @@ class MainWidget extends StatelessWidget {
 
                   ),
                   ListTile(
-                    leading: Icon(Icons.star,color: Colors.white),
+                    leading: const Icon(Icons.star,color: Colors.white),
                     title: const Text('Favourite locations',style:TextStyle(color:Colors.white,fontSize:20)),
                     onTap: () {
-                      // Update the state of the app.
-                      // ...
                     },
                   ),
                   ListTile(
-                    title: const Text('Item 2'),
+                    leading: const Padding(
+                      padding: EdgeInsets.only(left:30.0,top:5),
+                      child: Icon(Icons.location_pin,color: Colors.white,size: 15,),
+                    ),
+                    title: const Text('El Hay El Asher',style:TextStyle(color:Colors.white,fontSize:20)),
                     onTap: () {
-                      // Update the state of the app.
-                      // ...
+                    },
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.only(left:50.0,right:50.0),
+                    child: SizedBox(
+                      width: double.infinity,
+                        child: Text(' . . . . . . . . . . . . . . . . . . . . . . . . . . .',style: TextStyle(color:Colors.white),)),
+                  ),
+                  ListTile(
+                    leading: const Icon(Icons.location_on_outlined,color: Colors.white),
+                    title: const Text('Others locations',style:TextStyle(color:Colors.white,fontSize:15)),
+                    onTap: () {
+                    },
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 20,right:20),
+                    child: MyButton(text: "Manage Locations", height: 35, width: double.infinity, onPress: (){}),
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.only(top:10,left:50.0,right:50.0),
+                    child: SizedBox(
+                        width: double.infinity,
+                        child: Text(' . . . . . . . . . . . . . . . . . . . . . . . . . . .',style: TextStyle(color:Colors.white),)),
+                  ),
+                  ListTile(
+                    leading: const Icon(Icons.help_outline,color: Colors.white),
+                    title: const Text('Report Wrong Location',style:TextStyle(color:Colors.white,fontSize:20)),
+                    onTap: () {
+                    },
+                  ),
+                  ListTile(
+                    leading: const Icon(Icons.headset_mic_outlined,color: Colors.white),
+                    title: const Text('Contact us',style:TextStyle(color:Colors.white,fontSize:20)),
+                    onTap: () {
                     },
                   ),
                 ],
