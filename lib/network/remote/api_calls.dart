@@ -16,7 +16,7 @@ class ApiCalls {
         }).then((value) {
           temp = value.data['main']['temp'].toString();
     });
-print(temp);
+    print(temp);
     return temp;
   }
 

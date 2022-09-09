@@ -185,7 +185,7 @@ class MainWidget extends StatelessWidget {
                                             const SizedBox(height: 5,),
                                             const Icon(Icons.sunny, color: Colors.yellow,),
                                             const SizedBox(height: 5,),
-                                            MyText(text: '${int.parse(cubit.temp.split(".")[0])-1}°', color: Colors.white, fontSize: 24)
+                                            MyText(text: '${int.parse(cubit.temp.split(".")[0])-2}°', color: Colors.white, fontSize: 24)
                                           ],
                                         ),
                                         const SizedBox(width: 20,),
@@ -195,7 +195,7 @@ class MainWidget extends StatelessWidget {
                                             const SizedBox(height: 5,),
                                             const Icon(Icons.sunny, color: Colors.yellow,),
                                             const SizedBox(height: 5,),
-                                            MyText(text: '${int.parse(cubit.temp.split(".")[0])-1}°', color: Colors.white, fontSize: 24)
+                                            MyText(text: '${int.parse(cubit.temp.split(".")[0])-2}°', color: Colors.white, fontSize: 24)
                                           ],
                                         ),
                                         const SizedBox(width: 20,),
